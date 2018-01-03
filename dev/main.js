@@ -25,26 +25,28 @@
 	// 加载gif图片
 	var loadGif = function(gifName, callback) {
 		loadImg('gif/' + gifName + '.gif' + gifVersion, callback);
+		$('.sec-wrap.gif_' + gifName + ' img').attr('src', 'resources/gif/' + gifName + '.gif' + gifVersion);
 	};
 
 	// 显示图块
-	var showSec = function(index, callback, noReload) {
-		var sel = '.gif_' + index;
-		var secList = $('.sec-wrap').not(sel);
-		var sec = $('.sec-wrap').filter(sel);
-		if (noReload !== true) {
-			var img = sec.find('img');
-			img.removeAttr('src');
-			img.attr('src', 'resources/gif/' + index + '.gif' + gifVersion);
-		}
-		secList.css('z-index', '1');
+	var showSec = function(index, callback) {
+		var sec = $('.sec-wrap.gif_' + index);
 		sec.show();
 		instance.hide();
-		setTimeout(function() {
-			secList.hide();
-		}, 30);
-		if (callback && typeof callback === 'function') {
+		if (callback) {
 			callback(sec);
+		}
+	};
+
+	// 隐藏图块
+	var hideSec = function(index, reloadImg) {
+
+		var sec = $('.sec-wrap.gif_' + index);
+		sec.css('z-index', '1').hide();
+		if (reloadImg) {
+			setTimeout(function() {
+				sec.find('img').removeAttr('src').attr('src', 'resources/gif/' + index + '.gif' + gifVersion);
+			});
 		}
 	};
 
@@ -199,6 +201,7 @@
 			});
 		});
 		setTimeout(function() {
+			hideSec(1);
 			showSec(2, function(sec) {
 				showTS(sec, 13);
 				instance.increase();
@@ -208,8 +211,10 @@
 	var showSec3 = function() {
 		showSec(3);
 		setTimeout(function() {
+			hideSec(3, true);
 			showSec(4);
 			setTimeout(function() {
+				hideSec(4, true);
 				showSec5();
 			}, 1040);
 		}, 1080);
@@ -222,8 +227,10 @@
 	var showSec7 = function() {
 		showSec(7);
 		setTimeout(function() {
+			hideSec(7, true);
 			showSec(8);
 			setTimeout(function() {
+				hideSec(8, true);
 				showSec9();
 			}, 1080);
 		}, 1080);
@@ -236,8 +243,10 @@
 	var showSec11 = function() {
 		showSec(11);
 		setTimeout(function() {
+			hideSec(11, true);
 			showSec(12);
 			setTimeout(function() {
+				hideSec(12, true);
 				showSec13();
 			}, 2070);
 		}, 1080);
@@ -250,8 +259,10 @@
 	var showSec15 = function() {
 		showSec(15);
 		setTimeout(function() {
+			hideSec(15, true);
 			showSec(16);
 			setTimeout(function() {
+				hideSec(16, true);
 				showSec17();
 			}, 1000);
 		}, 2000);
@@ -264,8 +275,10 @@
 	var showSec19 = function() {
 		showSec(19);
 		setTimeout(function() {
+			hideSec(19, true);
 			showSec(20);
 			setTimeout(function() {
+				hideSec(20, true);
 				showSec21();
 			}, 90);
 		}, 1080);
@@ -280,10 +293,12 @@
 			instance.increase();
 		});
 		setTimeout(function() {
+			hideSec(22);
 			showSec(23, function(sec) {
 				showJG(sec);
 			});
 			setTimeout(function() {
+				hideSec(23);
 				showSec(24, function(sec) {
 					var text = sec.find('.text');
 					text.css('opacity', '0');
@@ -302,9 +317,11 @@
 		});
 
 		$('.sec-wrap.gif_2 .btn.fun.a').click(function() {
+			hideSec(2);
 			showSec3();
 		});
 		$('.sec-wrap.gif_2 .btn.fun.b').click(function() {
+			hideSec(2);
 			showSec(6, function(sec) {
 				showTS(sec, 5);
 				instance.increase();
@@ -312,10 +329,13 @@
 		});
 
 		$('.sec-wrap.gif_5 .btn.back').click(function() {
+			hideSec(5, true);
 			showSec('4fan');
 			setTimeout(function() {
+				hideSec('4fan', true);
 				showSec('3fan');
 				setTimeout(function() {
+					hideSec('3fan', true);
 					showSec(2, function() {
 						instance.show();
 					}, true);
@@ -324,9 +344,11 @@
 		});
 
 		$('.sec-wrap.gif_6 .btn.fun.a').click(function() {
+			hideSec(6);
 			showSec7();
 		});
 		$('.sec-wrap.gif_6 .btn.fun.b').click(function() {
+			hideSec(6);
 			showSec(10, function(sec) {
 				showTS(sec, 2);
 				instance.increase();
@@ -334,10 +356,13 @@
 		});
 
 		$('.sec-wrap.gif_9 .btn.back').click(function() {
+			hideSec(9, true);
 			showSec('8fan');
 			setTimeout(function() {
+				hideSec('8fan', true);
 				showSec('7fan');
 				setTimeout(function() {
+					hideSec('7fan', true);
 					showSec(6, function() {
 						instance.show();
 					}, true);
@@ -346,9 +371,11 @@
 		});
 
 		$('.sec-wrap.gif_10 .btn.fun.a').click(function() {
+			hideSec(10);
 			showSec11();
 		});
 		$('.sec-wrap.gif_10 .btn.fun.b').click(function() {
+			hideSec(10);
 			showSec(14, function(sec) {
 				showTS(sec, 2);
 				instance.increase();
@@ -356,10 +383,13 @@
 		});
 
 		$('.sec-wrap.gif_13 .btn.back').click(function() {
+			hideSec(13, true);
 			showSec('12fan');
 			setTimeout(function() {
+				hideSec('12fan', true);
 				showSec('11fan');
 				setTimeout(function() {
+					hideSec('11fan', true);
 					showSec(10, function() {
 						instance.show();
 					}, true);
@@ -368,9 +398,11 @@
 		});
 
 		$('.sec-wrap.gif_14 .btn.fun.a').click(function() {
+			hideSec(14);
 			showSec15();
 		});
 		$('.sec-wrap.gif_14 .btn.fun.b').click(function() {
+			hideSec(14);
 			showSec(18, function(sec) {
 				showTS(sec, 2);
 				instance.increase();
@@ -378,10 +410,13 @@
 		});
 
 		$('.sec-wrap.gif_17 .btn.back').click(function() {
+			hideSec(17, true);
 			showSec('16fan');
 			setTimeout(function() {
+				hideSec('16fan', true);
 				showSec('15fan');
 				setTimeout(function() {
+					hideSec('15fan', true);
 					showSec(14, function() {
 						instance.show();
 					}, true);
@@ -390,17 +425,22 @@
 		});
 
 		$('.sec-wrap.gif_18 .btn.fun.a').click(function() {
+			hideSec(18);
 			showSec19();
 		});
 		$('.sec-wrap.gif_18 .btn.fun.b').click(function() {
+			hideSec(18);
 			showSec22();
 		});
 
 		$('.sec-wrap.gif_21 .btn.back').click(function() {
+			hideSec(21, true);
 			showSec('20fan');
 			setTimeout(function() {
+				hideSec('20fan', true);
 				showSec('19fan');
 				setTimeout(function() {
+					hideSec('19fan', true);
 					showSec(18, function() {
 						instance.show();
 					});
@@ -409,6 +449,7 @@
 		});
 
 		$('.sec-wrap.gif_24 .anc').click(function() {
+			hideSec(24);
 			showSec(25);
 		});
 	});
