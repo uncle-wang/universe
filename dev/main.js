@@ -1,4 +1,5 @@
 (function() {
+
 	// 加载图片
 	var loadImg = function(imgPath, callback) {
 		var url = 'resources/' + imgPath;
@@ -34,6 +35,7 @@
 		img.attr('src', 'resources/gif/' + index + '.gif');
 		secList.css('z-index', '1');
 		sec.show();
+		instance.hide();
 		setTimeout(function() {
 			secList.hide();
 		}, 30);
@@ -121,6 +123,60 @@
 		});
 	};
 
+	// 距离
+	var instance = (function() {
+
+		var pos = -1, tt;
+
+		var poses = [
+			{t: 22, start: 0, end: 110, unit: [{name: '千米', fixed: 0}]},
+			{t: 12, start: 0, end: 5800, unit: [{name: '万千米', fixed: 0}]},
+			{t: 12, start: 0, end: 16000, unit: [{name: '光年', fixed: 0}, {name: '万光年', fixed: 2}]},
+			{t: 12, start: 1.6, end: 2, unit: [{name: '万光年', fixed: 2}]},
+			{t: 13, start: 0, end: 30000, unit: [{name: '万光年', fixed: 0}, {name: '亿光年', fixed: 2}]},
+			{t: 2, start: 2, end: 60, unit: [{name: '亿光年', fixed: 0}]}
+		];
+
+		var increase = function() {
+			pos ++;
+			clearInterval(tt);
+			var i = 0;
+			var obj = poses[pos];
+			var times = obj.t * 3;
+			var instance = obj.start;
+			var each = (obj.end - instance) / times;
+			var instanceText = $('.instance-text');
+			tt = setInterval(function() {
+				if (i < times) {
+					instance = instance + each;
+					i ++;
+					var info;
+					if (obj.unit.length === 2 && instance >= 10000) {
+						info = (instance / 10000).toFixed(obj.unit[1].fixed) + obj.unit[1].name;
+					}
+					else {
+						info = instance.toFixed(obj.unit[0].fixed) + obj.unit[0].name;
+					}
+					instanceText.text(info + '左右');
+				}
+				else {
+					clearInterval(tt);
+					if (pos >= poses.length - 1) {
+						_hide();
+					}
+				}
+			}, 333.33);
+			_show();
+		};
+		var _show = function() {
+			$('.instance-wrap').show();
+		};
+		var _hide = function() {
+			$('.instance-wrap').hide();
+		};
+		return {increase: increase, show: _show, hide: _hide};
+	}());
+
 	// 显示sec
 	var showSec1 = function() {
 		showSec(1, function(sec) {
@@ -130,7 +186,9 @@
 			});
 		});
 		setTimeout(function() {
-			showSec(2);
+			showSec(2, function() {
+				instance.increase();
+			});
 		}, 21090);
 	};
 	var showSec3 = function() {
@@ -204,7 +262,9 @@
 		});
 	};
 	var showSec22 = function() {
-		showSec(22);
+		showSec(22, function() {
+			instance.increase();
+		});
 		setTimeout(function() {
 			showSec(23, function(sec) {
 				showJG(sec);
@@ -231,7 +291,9 @@
 			showSec3();
 		});
 		$('.sec-wrap.gif_2 .btn.fun.b').click(function() {
-			showSec(6);
+			showSec(6, function() {
+				instance.increase();
+			});
 		});
 
 		$('.sec-wrap.gif_5 .btn.back').click(function() {
@@ -239,7 +301,9 @@
 			setTimeout(function() {
 				showSec('3fan');
 				setTimeout(function() {
-					showSec(2);
+					showSec(2, function() {
+						instance.show();
+					});
 				}, 1080);
 			}, 1040);
 		});
@@ -248,7 +312,9 @@
 			showSec7();
 		});
 		$('.sec-wrap.gif_6 .btn.fun.b').click(function() {
-			showSec(10);
+			showSec(10, function() {
+				instance.increase();
+			});
 		});
 
 		$('.sec-wrap.gif_9 .btn.back').click(function() {
@@ -256,7 +322,9 @@
 			setTimeout(function() {
 				showSec('7fan');
 				setTimeout(function() {
-					showSec(6);
+					showSec(6, function() {
+						instance.show();
+					});
 				}, 1080);
 			}, 1080);
 		});
@@ -265,7 +333,9 @@
 			showSec11();
 		});
 		$('.sec-wrap.gif_10 .btn.fun.b').click(function() {
-			showSec(14);
+			showSec(14, function() {
+				instance.increase();
+			});
 		});
 
 		$('.sec-wrap.gif_13 .btn.back').click(function() {
@@ -273,7 +343,9 @@
 			setTimeout(function() {
 				showSec('11fan');
 				setTimeout(function() {
-					showSec(10);
+					showSec(10, function() {
+						instance.show();
+					});
 				}, 1080);
 			}, 2070);
 		});
@@ -282,7 +354,9 @@
 			showSec15();
 		});
 		$('.sec-wrap.gif_14 .btn.fun.b').click(function() {
-			showSec(18);
+			showSec(18, function() {
+				instance.increase();
+			});
 		});
 
 		$('.sec-wrap.gif_17 .btn.back').click(function() {
@@ -290,7 +364,9 @@
 			setTimeout(function() {
 				showSec('15fan');
 				setTimeout(function() {
-					showSec(14);
+					showSec(14, function() {
+						instance.show();
+					});
 				}, 2000);
 			}, 1000);
 		});
@@ -307,7 +383,9 @@
 			setTimeout(function() {
 				showSec('19fan');
 				setTimeout(function() {
-					showSec(18);
+					showSec(18, function() {
+						instance.show();
+					});
 				}, 1080);
 			}, 90);
 		});
