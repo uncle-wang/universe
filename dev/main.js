@@ -26,13 +26,17 @@
 
 	// 显示图块
 	var showSec = function(index, callback) {
-		var secList = $('.sec-wrap');
-		secList.hide();
-		var sec = secList.filter('.gif_' + index);
+		var sel = '.gif_' + index;
+		var secList = $('.sec-wrap').not(sel);
+		var sec = $('.sec-wrap').filter(sel);
 		var img = sec.find('img');
 		img.removeAttr('src');
 		img.attr('src', 'resources/gif/' + index + '.gif');
+		secList.css('z-index', '1');
 		sec.show();
+		setTimeout(function() {
+			secList.hide();
+		}, 30);
 		if (callback) {
 			callback(sec);
 		}
@@ -40,9 +44,8 @@
 
 	// 计算屏幕的尺寸以设置gif尺寸
 	var setGifSize = function() {
-		var padTop = 128 / window.devicePixelRatio;
 		var winWidth  = $(window).width();
-		var winHeight = $(window).height() - padTop;
+		var winHeight = $(window).height();
 		var winScale = winHeight / winWidth;
 		var gifScale = 417 / 235;
 		var style = $('#gif_style');
@@ -55,7 +58,6 @@
 			var marginTop = (winHeight - height) / 2;
 			style.html('.sec-wrap img {width: ' + (winHeight / gifScale) + 'px;}');
 		}
-		$('.wrap').css('padding-top', padTop + 'px');
 	};
 
 	// 初始化

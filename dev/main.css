@@ -5,7 +5,6 @@ body {
 .wrap {
 	overflow: hidden;
 	background-color: #000;
-	box-sizing: border-box;
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -13,7 +12,7 @@ body {
 	top: 0;
 }
 .process {
-	z-index: 2;
+	z-index: 3;
 	height: 100%;
 	position: relative;
 	background-color: #000;
@@ -27,6 +26,10 @@ body {
 	height: 100%;
 	display: none;
 	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 0;
 }
 .sec-wrap .sec {
 	height: 100%;
@@ -96,21 +99,6 @@ a.btn.back:before {
 	padding-bottom: 100%;
 	display: block;
 }
-.anc-wrap.a {
-	width: 18%;
-	left: 24%;
-	top: 20%;
-}
-.anc-wrap.b {
-	width: 28%;
-	bottom: 7%;
-	left: 12%;
-}
-.anc-wrap.c {
-	width: 33%;
-	right: 15%;
-	top: 31%;
-}
 
 .gif_1 .text {
 	text-align: center;
@@ -118,17 +106,17 @@ a.btn.back:before {
 	left: 2%;
 }
 .gif_1 .text.a {
-	bottom: 292px;
+	bottom: 302px;
 }
 .gif_1 .text.b {
-	bottom: 144px;
+	bottom: 154px;
 }
 .gif_2 .btn.fun.a {
 	right: 32px;
 	bottom: 460px;
 }
 .gif_2 .btn.fun.b {
-	bottom: 148px;
+	bottom: 168px;
 	left: 48px;
 }
 .gif_5 .text {
@@ -190,4 +178,19 @@ a.btn.back:before {
 .gif_24 .text {
 	right: 32px;
 	bottom: 520px;
+}
+.gif_24 .anc-wrap.a {
+	width: 18%;
+	left: 24%;
+	top: 20%;
+}
+.gif_24 .anc-wrap.b {
+	width: 28%;
+	left: 12%;
+	top: 72%;
+}
+.gif_24 .anc-wrap.c {
+	width: 33%;
+	right: 15%;
+	top: 31%;
 }
