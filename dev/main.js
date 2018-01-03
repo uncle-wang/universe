@@ -28,20 +28,22 @@
 	};
 
 	// 显示图块
-	var showSec = function(index, callback) {
+	var showSec = function(index, callback, noReload) {
 		var sel = '.gif_' + index;
 		var secList = $('.sec-wrap').not(sel);
 		var sec = $('.sec-wrap').filter(sel);
-		var img = sec.find('img');
-		img.removeAttr('src');
-		img.attr('src', 'resources/gif/' + index + '.gif' + gifVersion);
+		if (noReload !== true) {
+			var img = sec.find('img');
+			img.removeAttr('src');
+			img.attr('src', 'resources/gif/' + index + '.gif' + gifVersion);
+		}
 		secList.css('z-index', '1');
 		sec.show();
 		instance.hide();
 		setTimeout(function() {
 			secList.hide();
 		}, 30);
-		if (callback) {
+		if (callback && typeof callback === 'function') {
 			callback(sec);
 		}
 	};
@@ -316,7 +318,7 @@
 				setTimeout(function() {
 					showSec(2, function() {
 						instance.show();
-					});
+					}, true);
 				}, 1080);
 			}, 1040);
 		});
@@ -338,7 +340,7 @@
 				setTimeout(function() {
 					showSec(6, function() {
 						instance.show();
-					});
+					}, true);
 				}, 1080);
 			}, 1080);
 		});
@@ -360,7 +362,7 @@
 				setTimeout(function() {
 					showSec(10, function() {
 						instance.show();
-					});
+					}, true);
 				}, 1080);
 			}, 2070);
 		});
@@ -372,7 +374,7 @@
 			showSec(18, function(sec) {
 				showTS(sec, 2);
 				instance.increase();
-			});
+			}, true);
 		});
 
 		$('.sec-wrap.gif_17 .btn.back').click(function() {
@@ -382,7 +384,7 @@
 				setTimeout(function() {
 					showSec(14, function() {
 						instance.show();
-					});
+					}, true);
 				}, 2000);
 			}, 1000);
 		});
