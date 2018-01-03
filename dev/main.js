@@ -1,5 +1,7 @@
 (function() {
 
+	var gifVersion = '?v=01031601';
+
 	// 加载图片
 	var loadImg = function(imgPath, callback) {
 		var url = 'resources/' + imgPath;
@@ -22,7 +24,7 @@
 
 	// 加载gif图片
 	var loadGif = function(gifName, callback) {
-		loadImg('gif/' + gifName + '.gif', callback);
+		loadImg('gif/' + gifName + '.gif' + gifVersion, callback);
 	};
 
 	// 显示图块
@@ -32,7 +34,7 @@
 		var sec = $('.sec-wrap').filter(sel);
 		var img = sec.find('img');
 		img.removeAttr('src');
-		img.attr('src', 'resources/gif/' + index + '.gif');
+		img.attr('src', 'resources/gif/' + index + '.gif' + gifVersion);
 		secList.css('z-index', '1');
 		sec.show();
 		instance.hide();
@@ -122,6 +124,15 @@
 			back.animate({opacity: 1}, 500);
 		});
 	};
+	// 探索按钮显示
+	var showTS = function(sec, t) {
+		var btns = sec.find('a.btn.fun');
+		btns.hide();
+		btns.css('opacity', '0');
+		setTimeout(function() {
+			btns.show().animate({opacity: 1}, 500);
+		}, t * 1000);
+	};
 
 	// 距离
 	var instance = (function() {
@@ -129,7 +140,7 @@
 		var pos = -1, tt;
 
 		var poses = [
-			{t: 22, start: 0, end: 110, unit: [{name: '千米', fixed: 0}]},
+			{t: 15, start: 0, end: 110, unit: [{name: '千米', fixed: 0}]},
 			{t: 12, start: 0, end: 5800, unit: [{name: '万千米', fixed: 0}]},
 			{t: 12, start: 0, end: 16000, unit: [{name: '光年', fixed: 0}, {name: '万光年', fixed: 2}]},
 			{t: 12, start: 1.6, end: 2, unit: [{name: '万光年', fixed: 2}]},
@@ -186,10 +197,11 @@
 			});
 		});
 		setTimeout(function() {
-			showSec(2, function() {
+			showSec(2, function(sec) {
+				showTS(sec, 13);
 				instance.increase();
 			});
-		}, 21090);
+		}, 13040);
 	};
 	var showSec3 = function() {
 		showSec(3);
@@ -291,7 +303,8 @@
 			showSec3();
 		});
 		$('.sec-wrap.gif_2 .btn.fun.b').click(function() {
-			showSec(6, function() {
+			showSec(6, function(sec) {
+				showTS(sec, 5);
 				instance.increase();
 			});
 		});
@@ -312,7 +325,8 @@
 			showSec7();
 		});
 		$('.sec-wrap.gif_6 .btn.fun.b').click(function() {
-			showSec(10, function() {
+			showSec(10, function(sec) {
+				showTS(sec, 2);
 				instance.increase();
 			});
 		});
@@ -333,7 +347,8 @@
 			showSec11();
 		});
 		$('.sec-wrap.gif_10 .btn.fun.b').click(function() {
-			showSec(14, function() {
+			showSec(14, function(sec) {
+				showTS(sec, 2);
 				instance.increase();
 			});
 		});
@@ -354,7 +369,8 @@
 			showSec15();
 		});
 		$('.sec-wrap.gif_14 .btn.fun.b').click(function() {
-			showSec(18, function() {
+			showSec(18, function(sec) {
+				showTS(sec, 2);
 				instance.increase();
 			});
 		});
