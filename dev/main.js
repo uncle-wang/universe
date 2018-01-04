@@ -1,6 +1,6 @@
 (function() {
 
-	var gifVersion = '?v=01031601';
+	var gifVersion = '?v=01041530';
 
 	// 加载图片
 	var loadImg = function(imgPath, callback) {
@@ -123,9 +123,9 @@
 		var text = sec.find('.text');
 		var back = sec.find('.btn.back');
 		text.css('opacity', '0');
-		back.css('opacity', '0');
+		back.css('opacity', '0').hide();
 		text.animate({opacity: 1}, 4000, function() {
-			back.animate({opacity: 1}, 500);
+			back.show().animate({opacity: 1}, 500);
 		});
 	};
 	// 探索按钮显示
@@ -144,12 +144,12 @@
 		var pos = -1, tt;
 
 		var poses = [
-			{t: 15, start: 0, end: 110, unit: [{name: '千米', fixed: 0}]},
-			{t: 12, start: 0, end: 5800, unit: [{name: '万千米', fixed: 0}]},
-			{t: 12, start: 0, end: 16000, unit: [{name: '光年', fixed: 0}, {name: '万光年', fixed: 2}]},
-			{t: 12, start: 1.6, end: 2, unit: [{name: '万光年', fixed: 2}]},
-			{t: 13, start: 0, end: 30000, unit: [{name: '万光年', fixed: 0}, {name: '亿光年', fixed: 2}]},
-			{t: 2, start: 2, end: 60, unit: [{name: '亿光年', fixed: 0}]}
+			{t: 12, start: 0, end: 110, unit: [{name: '千米', fixed: 0}]},
+			{t: 10, start: 0, end: 5800, unit: [{name: '万千米', fixed: 0}]},
+			{t: 9, start: 0, end: 16000, unit: [{name: '光年', fixed: 0}, {name: '万光年', fixed: 2}]},
+			{t: 9, start: 1.6, end: 2, unit: [{name: '万光年', fixed: 2}]},
+			{t: 15, start: 0, end: 30000, unit: [{name: '万光年', fixed: 0}, {name: '亿光年', fixed: 1}]},
+			{t: 6, start: 2, end: 60, unit: [{name: '亿光年', fixed: 0}]}
 		];
 
 		var increase = function() {
@@ -157,7 +157,7 @@
 			clearInterval(tt);
 			var i = 0;
 			var obj = poses[pos];
-			var times = obj.t * 3;
+			var times = obj.t;
 			var instance = obj.start;
 			var each = (obj.end - instance) / times;
 			var instanceText = $('.instance-text');
@@ -295,6 +295,10 @@
 		setTimeout(function() {
 			hideSec(22);
 			showSec(23, function(sec) {
+				instance.show();
+				setTimeout(function() {
+					instance.hide();
+				}, 500);
 				showJG(sec);
 			});
 			setTimeout(function() {
