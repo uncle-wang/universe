@@ -1,6 +1,6 @@
 (function() {
 
-	var gifVersion = '?v=01041530';
+	var gifVersion = '?v=01051700';
 
 	// 加载图片
 	var loadImg = function(imgPath, callback) {
@@ -143,13 +143,22 @@
 
 		var pos = -1, tt;
 
+		var currency = function(num) {
+
+			num = '' + num;
+			for (var i = num.length - 3; i > 0; i -= 3) {
+				num = num.substring(0, i) + ',' + num.substr(i);
+			}
+			return num;
+		};
+
 		var poses = [
-			{t: 12, start: 0, end: 110, unit: [{name: '千米', fixed: 0}]},
-			{t: 10, start: 0, end: 5800, unit: [{name: '万千米', fixed: 0}]},
-			{t: 9, start: 0, end: 16000, unit: [{name: '光年', fixed: 0}, {name: '万光年', fixed: 2}]},
-			{t: 9, start: 1.6, end: 2, unit: [{name: '万光年', fixed: 2}]},
-			{t: 15, start: 0, end: 30000, unit: [{name: '万光年', fixed: 0}, {name: '亿光年', fixed: 1}]},
-			{t: 6, start: 2, end: 60, unit: [{name: '亿光年', fixed: 0}]}
+			{t: 12, start: 0, end: 110, unit: '千米'},
+			{t: 10, start: 0, end: 58000000, unit: '千米'},
+			{t: 9, start: 0, end: 16000, unit: '万光年'},
+			{t: 9, start: 16000, end: 20000, unit: '光年'},
+			{t: 15, start: 0, end: 300000000, unit: '光年'},
+			{t: 6, start: 300000000, end: 6000000000, unit: '亿光年'}
 		];
 
 		var increase = function() {
@@ -165,13 +174,7 @@
 				if (i < times) {
 					instance = instance + each;
 					i ++;
-					var info;
-					if (obj.unit.length === 2 && instance >= 10000) {
-						info = (instance / 10000).toFixed(obj.unit[1].fixed) + obj.unit[1].name;
-					}
-					else {
-						info = instance.toFixed(obj.unit[0].fixed) + obj.unit[0].name;
-					}
+					var info = currency(Math.round(instance)) + obj.unit;
 					instanceText.text(info + '左右');
 				}
 				else {

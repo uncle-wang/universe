@@ -37,7 +37,7 @@ body {
 }
 .instance-wrap .instance-box {
 	height: 21px;
-	padding: 0 108px;
+	padding: 0 98px;
 	position: relative;
 }
 .instance-wrap .instance-text {
@@ -51,7 +51,7 @@ body {
 	background-color: #fff;
 	bottom: 12px;
 	height: 1px;
-	width: 108px;
+	width: 98px;
 }
 .instance-wrap .instance-line.left {
 	left: 0;
@@ -101,6 +101,10 @@ a.btn {
 	height: 16px;
 	line-height: 16px;
 }
+@-webkit-keyframes breath{
+	from {opacity: 1;}
+	to {opacity: .4;}
+}
 a.btn.fun:before {
 	content: '';
 	display: block;
@@ -112,6 +116,12 @@ a.btn.fun:before {
 	background-size: contain;
 	background-repeat: no-repeat;
 	top: 1px;
+	-webkit-animation: breath 0.6s linear infinite alternate;
+	animation: breath 0.6s linear infinite alternate;
+}
+a.btn.fun.b {
+	left: 48px;
+	bottom: 128px;
 }
 a.btn.back {
 	bottom: 48px;
@@ -154,10 +164,6 @@ a.btn.back:before {
 	right: 32px;
 	bottom: 460px;
 }
-.gif_2 .btn.fun.b {
-	bottom: 168px;
-	left: 48px;
-}
 .gif_5 .text {
 	left: 48px;
 	bottom: 120px;
@@ -166,21 +172,13 @@ a.btn.back:before {
 	right: 140px;
 	bottom: 320px;
 }
-.gif_6 .btn.fun.b {
-	right: 18px;
-	bottom: 72px;
-}
 .gif_9 .text {
 	left: 48px;
 	bottom: 420px;
 }
 .gif_10 .btn.fun.a {
-	left: 24px;
+	right: 32px;
 	bottom: 320px;
-}
-.gif_10 .btn.fun.b {
-	right: 18px;
-	bottom: 72px;
 }
 .gif_13 .text {
 	left: 48px;
@@ -190,10 +188,6 @@ a.btn.back:before {
 	right: 32px;
 	bottom: 400px;
 }
-.gif_14 .btn.fun.b {
-	bottom: 128px;
-	left: 32px;
-}
 .gif_17 .text {
 	left: 48px;
 	bottom: 420px;
@@ -201,10 +195,6 @@ a.btn.back:before {
 .gif_18 .btn.fun.a {
 	right: 32px;
 	bottom: 400px;
-}
-.gif_18 .btn.fun.b {
-	bottom: 128px;
-	left: 32px;
 }
 .gif_21 .text {
 	left: 48px;

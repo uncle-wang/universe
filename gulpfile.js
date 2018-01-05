@@ -28,7 +28,7 @@ gulp.task('uglifyJs', function() {
 
 	gulp
 		.src(jsSrc)
-		.pipe(uglify()) 
+		.pipe(uglify())
 		.pipe(gulp.dest(jsDst));
 });
 // 监测js文件变化
