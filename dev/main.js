@@ -1,6 +1,6 @@
 (function() {
 
-	var gifVersion = '?v=01051700';
+	var gifVersion = '?v=01071330';
 
 	// 加载图片
 	var loadImg = function(imgPath, callback) {
@@ -134,7 +134,9 @@
 		btns.hide();
 		btns.css('opacity', '0');
 		setTimeout(function() {
-			btns.show().animate({opacity: 1}, 500);
+			btns.show().animate({opacity: 1}, 500, function() {
+				btns.addClass('animate');
+			});
 		}, t * 1000);
 	};
 
@@ -315,6 +317,53 @@
 		}, 2000);
 	};
 
+	// 最终分享流程
+	var _showPopWrap = function(popWrap) {
+		popWrap.css({zIndex: 3, opacity: 1});
+	};
+	var _hidePopWrap = function() {
+		$('.pop-wrap').css({zIndex: 1, opacity: 0});
+	};
+	var showNameStar = function() {
+		_hidePopWrap();
+		_showPopWrap($('.pop-wrap.name'));
+	};
+	var showNameForm = function() {
+		_hidePopWrap();
+		_showPopWrap($('.pop-wrap.form'));
+	};
+	var checkNameLength = function(val) {
+		var len = 0;
+		for (var i = 0; i < val.length; i ++) {
+			var vChar = val[i];
+			if (vChar.charCodeAt() > 128) {
+				len += 2;
+			}
+			else {
+				len ++;
+			}
+		}
+		if (len > 20) {
+			return false;
+		}
+		return true;
+	};
+	var showNameResult = function() {
+		var resultWrap = $('.pop-wrap.result');
+		var instanceArr = [3, 5, 8, 10, 15, 18];
+		var instance = instanceArr[Math.floor(Math.random() * 6)];
+		var name = $('.pop-wrap.form .form-input').val();
+		if (checkNameLength(name)) {
+			resultWrap.find('.star-name').text(name);
+			resultWrap.find('.star-instance').text(instance);
+			_hidePopWrap();
+			_showPopWrap(resultWrap);
+		}
+		else {
+			alert('对不起，命名长度超过限制，最多可输入20个字节，中文占2字节，英文占1字节');
+		}
+	};
+
 	$(document).ready(function() {
 
 		init();
@@ -457,7 +506,21 @@
 
 		$('.sec-wrap.gif_24 .anc').click(function() {
 			hideSec(24);
-			showSec(25);
+			showSec(25, function() {
+				setTimeout(function() {
+					showNameStar();
+				}, 4030);
+			});
+		});
+
+		$('.sec-wrap.gif_25 .pop-wrap.name .pop-btn-name').click(function() {
+			showNameForm();
+		});
+		$('.sec-wrap.gif_25 .pop-wrap.form .form-submit').click(function() {
+			showNameResult();
+		});
+		$('.sec-wrap.gif_25 .pop-share-wrap .pop-share').click(function() {
+			$('.sec-wrap.gif_25 .pop-share-wrap').hide();
 		});
 	});
 }());
