@@ -349,18 +349,23 @@
 		return true;
 	};
 	var showNameResult = function() {
-		var resultWrap = $('.pop-wrap.result');
-		var instanceArr = [3, 5, 8, 10, 15, 18];
-		var instance = instanceArr[Math.floor(Math.random() * 6)];
 		var name = $('.pop-wrap.form .form-input').val();
-		if (checkNameLength(name)) {
-			resultWrap.find('.star-name').text(name);
-			resultWrap.find('.star-instance').text(instance);
-			_hidePopWrap();
-			_showPopWrap(resultWrap);
+		if (name.length > 0) {
+			if (checkNameLength(name)) {
+				var resultWrap = $('.pop-wrap.result');
+				var instanceArr = [3, 5, 8, 10, 15, 18];
+				var instance = instanceArr[Math.floor(Math.random() * 6)];
+				resultWrap.find('.star-name').text(name);
+				resultWrap.find('.star-instance').text(instance);
+				_hidePopWrap();
+				_showPopWrap(resultWrap);
+			}
+			else {
+				alert('对不起，命名长度超过限制，最多可输入20个字节，中文占2字节，英文占1字节');
+			}
 		}
 		else {
-			alert('对不起，命名长度超过限制，最多可输入20个字节，中文占2字节，英文占1字节');
+			alert('请为星球命名');
 		}
 	};
 
