@@ -1,6 +1,6 @@
 (function() {
 
-	var gifVersion = '?v=01071330';
+	var gifVersion = '?v=01081330';
 
 	// 加载图片
 	var loadImg = function(imgPath, callback) {
