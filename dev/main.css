@@ -1,6 +1,11 @@
+@font-face {
+	font-family: Roboto;
+	src: url(font/my.TTF);
+}
 body {
 	margin: 0;
 	overflow: hidden;
+	font-family: Roboto, Arial;
 }
 .wrap {
 	overflow: hidden;
