@@ -3,10 +3,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<link rel="stylesheet" type="text/css" href="resources/main.css?v=01071330">
+		<link rel="stylesheet" type="text/css" href="resources/main.css?v=01091511">
 		<style type="text/css" id="gif_style"></style>
 		<script type="text/javascript" src="resources/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="resources/main.js?v=01081330"></script>
+		<script type="text/javascript" src="resources/main.js?v=01091511"></script>
 	</head>
 	<body>
 		<div class="wrap">
@@ -18,6 +18,11 @@
 					<div class="instance-line right"></div>
 					<div class="instance-text">0千米</div>
 				</div>
+			</div>
+			<div class="music-wrap">
+				<a class="music-btn on show"></a>
+				<a class="music-btn off"></a>
+				<audio id="music" loop></audio>
 			</div>
 			<div class="sec-wrap gif_1">
 				<div class="sec">
@@ -56,9 +61,9 @@
 				<div class="sec">
 					<div class="gif-wrap"><img></div>
 					<p class="text">
-						此刻的你可以近距离地欣赏极光。<br/>
-						这是在两极附近的高空中，<br/>
-						大气受到太阳风轰击后，<br/>
+						此刻的你可以近距离地欣赏极光。<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是在两极附近的高空中，<br>
+						大气受到太阳风轰击后，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 						夜间经常会出现的光辉
 					</p>
 					<a class="btn back">返回</a>
@@ -246,6 +251,7 @@
 						宇宙深处是否有未知的生命和文明？<br/>
 						你不知道，但你知道你会一直探索下去。
 					</p>
+					<a class="btn fun b">继续探索</a>
 				</div>
 			</div>
 			<div class="sec-wrap gif_24">
@@ -271,7 +277,10 @@
 				</div>
 				<div class="pop-wrap form">
 					<div class="form-wrap">
-						<input class="form-input" placeholder="最多10个中文或20个英文" maxlength="20">
+						<div class="form-input-wrap">
+							<input class="form-input" placeholder="最多10个中文或20个英文" maxlength="20">
+							<div class="form-input-unit">星</div>
+						</div>
 						<a class="form-submit"></a>
 					</div>
 				</div>
@@ -285,9 +294,9 @@
 					</div>
 					<a class="pop-btn-qb"></a>
 					<div class="pop-product"></div>
-					<div class="pop-share-wrap"><div class="pop-share"></div></div>
 				</div>
 			</div>
+			<div class="pop-share-wrap"><div class="pop-share"></div></div>
 		</div>
 	</body>
 </html>

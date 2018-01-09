@@ -1,25 +1,53 @@
 (function() {
 
-	var gifVersion = '?v=01081330';
+	var gifVersion = '?v=01091500';
 
-	// 加载图片
-	var loadImg = function(imgPath, callback) {
-		var url = 'resources/' + imgPath;
-		var img = new Image();
-		img.src = url;
-		if (img.complete) {
+	// 加载音频
+	var loadAudio = function(callback) {
+
+		var audio = $('#music');
+		audio.attr('src', 'resources/mp3/Infinite_Space.mp3');
+
+		// 判断是否微信浏览器
+		var ua = window.navigator.userAgent.toLowerCase();
+		if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+			document.addEventListener("WeixinJSBridgeReady", function () {
+				audio[0].play();
+				audio[0].oncanplay = function() {
+					if (callback) {
+						callback();
+					}
+				};
+			}, false);
+		}
+		else {
+			audio[0].play();
 			if (callback) {
 				callback();
 			}
 		}
-		else {
-			img.onload = function() {
+	};
+
+	// 加载图片
+	var loadImg = function(imgPath, callback) {
+		setTimeout(function() {
+			var url = 'resources/' + imgPath;
+			var img = new Image();
+			img.src = url;
+			if (img.complete) {
 				if (callback) {
 					callback();
 				}
-				img.onload = null;
-			};
-		}
+			}
+			else {
+				img.onload = function() {
+					if (callback) {
+						callback();
+					}
+					img.onload = null;
+				};
+			}
+		}, 100);
 	};
 
 	// 加载gif图片
@@ -73,42 +101,46 @@
 		loadGif('1', function() {
 			showSec1();
 			document.querySelector('.process').style.display = 'none';
-			loadImg('image/icon_dot.png');
-			loadImg('image/icon_star.png');
-			loadGif('2', function() {
-				loadGif('3');
-				loadGif('4');
-				loadGif('5');
-				loadGif('4fan');
-				loadGif('3fan');
-				loadGif('6', function() {
-					loadGif('7');
-					loadGif('8');
-					loadGif('9');
-					loadGif('8fan');
-					loadGif('7fan');
-					loadGif('10', function() {
-						loadGif('11');
-						loadGif('12');
-						loadGif('13');
-						loadGif('12fan');
-						loadGif('11fan');
-						loadGif('14', function() {
-							loadGif('15');
-							loadGif('16');
-							loadGif('17');
-							loadGif('16fan');
-							loadGif('15fan');
-							loadGif('18', function() {
-								loadGif('19');
-								loadGif('20');
-								loadGif('21');
-								loadGif('20fan');
-								loadGif('19fan');
-								loadGif('22', function() {
-									loadGif('23');
-									loadGif('24');
-									loadGif('25');
+			loadAudio(function() {
+				setTimeout(function() {
+					loadImg('image/icon_dot.png');
+					loadImg('image/icon_star.png');
+					loadGif('2', function() {
+						loadGif('3');
+						loadGif('4');
+						loadGif('5');
+						loadGif('4fan');
+						loadGif('3fan');
+						loadGif('6', function() {
+							loadGif('7');
+							loadGif('8');
+							loadGif('9');
+							loadGif('8fan');
+							loadGif('7fan');
+							loadGif('10', function() {
+								loadGif('11');
+								loadGif('12');
+								loadGif('13');
+								loadGif('12fan');
+								loadGif('11fan');
+								loadGif('14', function() {
+									loadGif('15');
+									loadGif('16');
+									loadGif('17');
+									loadGif('16fan');
+									loadGif('15fan');
+									loadGif('18', function() {
+										loadGif('19');
+										loadGif('20');
+										loadGif('21');
+										loadGif('20fan');
+										loadGif('19fan');
+										loadGif('22', function() {
+											loadGif('23');
+											loadGif('24');
+											loadGif('25');
+										});
+									});
 								});
 							});
 						});
@@ -200,18 +232,24 @@
 	// 显示sec
 	var showSec1 = function() {
 		showSec(1, function(sec) {
+			var textA = sec.find('.text.a');
+			var textB = sec.find('.text.b');
 			sec.find('.text').css('opacity', '0');
-			sec.find('.text.a').animate({opacity: 1}, 5000, function() {
-				sec.find('.text.b').animate({opacity: 1}, 5000);
+			textA.animate({opacity: 1}, 4000, function() {
+				textA.animate({opacity: 0}, 2000, function() {
+					textB.animate({opacity: 1}, 4000, function() {
+						textB.animate({opacity: 0}, 2000);
+					});
+				});
 			});
 		});
 		setTimeout(function() {
 			hideSec(1);
 			showSec(2, function(sec) {
-				showTS(sec, 13);
+				showTS(sec, 3);
 				instance.increase();
 			});
-		}, 13040);
+		}, 14040);
 	};
 	var showSec3 = function() {
 		showSec(3);
@@ -305,15 +343,8 @@
 					instance.hide();
 				}, 500);
 				showJG(sec);
+				showTS(sec, 4);
 			});
-			setTimeout(function() {
-				hideSec(23);
-				showSec(24, function(sec) {
-					var text = sec.find('.text');
-					text.css('opacity', '0');
-					text.animate({opacity: 1}, 1000);
-				});
-			}, 11080);
 		}, 2000);
 	};
 
@@ -359,6 +390,7 @@
 				resultWrap.find('.star-instance').text(instance);
 				_hidePopWrap();
 				_showPopWrap(resultWrap);
+				$('.pop-share-wrap').show();
 			}
 			else {
 				alert('对不起，命名长度超过限制，最多可输入20个字节，中文占2字节，英文占1字节');
@@ -375,6 +407,18 @@
 		setGifSize();
 		$(window).resize(function() {
 			setGifSize();
+		});
+
+		$('.music-wrap .music-btn.on').click(function() {
+			$(this).removeClass('show');
+			$('.music-wrap .music-btn.off').addClass('show');
+			$('#music')[0].pause();
+		});
+
+		$('.music-wrap .music-btn.off').click(function() {
+			$(this).removeClass('show');
+			$('.music-wrap .music-btn.on').addClass('show');
+			$('#music')[0].play();
 		});
 
 		$('.sec-wrap.gif_2 .btn.fun.a').click(function() {
@@ -509,6 +553,15 @@
 			}, 90);
 		});
 
+		$('.sec-wrap.gif_23 .btn.fun.b').click(function() {
+			hideSec(23);
+			showSec(24, function(sec) {
+				var text = sec.find('.text');
+				text.css('opacity', '0');
+				text.animate({opacity: 1}, 1000);
+			});
+		});
+
 		$('.sec-wrap.gif_24 .anc').click(function() {
 			hideSec(24);
 			showSec(25, function() {
@@ -524,8 +577,8 @@
 		$('.sec-wrap.gif_25 .pop-wrap.form .form-submit').click(function() {
 			showNameResult();
 		});
-		$('.sec-wrap.gif_25 .pop-share-wrap .pop-share').click(function() {
-			$('.sec-wrap.gif_25 .pop-share-wrap').hide();
+		$('.pop-share-wrap .pop-share').click(function() {
+			$('.pop-share-wrap').hide();
 		});
 	});
 }());
