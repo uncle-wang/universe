@@ -138,7 +138,9 @@
 										loadGif('22', function() {
 											loadGif('23');
 											loadGif('24');
-											loadGif('25');
+											loadGif('25', function() {
+												loadImg('image/share.png');
+											});
 										});
 									});
 								});
